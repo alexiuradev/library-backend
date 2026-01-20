@@ -16,10 +16,12 @@
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/Rental.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/DbUserDetailsService.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/dto/RentalResponse.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/config/CorsConfig.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/common/ApiExceptionHandler.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookCopy.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/OverdueRentalScheduler.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/AuthorService.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/demo/DataInitializer.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/AuthResponse.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/AuthLoginRequest.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/Book.java

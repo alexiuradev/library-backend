@@ -22,6 +22,7 @@ com/example/library/author/AuthorService.class
 com/example/library/book/BookRepository.class
 com/example/library/book/BookController.class
 com/example/library/author/dto/CreateAuthorRequest.class
+com/example/library/demo/DataInitializer.class
 com/example/library/book/BookCopy.class
 com/example/library/security/DbUserDetailsService.class
 com/example/library/security/Role.class
@@ -38,6 +39,7 @@ com/example/library/rental/RentalService.class
 com/example/library/auth/AuthService.class
 com/example/library/book/dto/AddCopiesRequest.class
 com/example/library/auth/dto/AuthResponse.class
+com/example/library/config/CorsConfig.class
 com/example/library/security/JwtService.class
 com/example/library/LibraryApplication.class
 com/example/library/common/ApiExceptionHandler$2.class
