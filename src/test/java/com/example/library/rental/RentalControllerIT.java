@@ -28,8 +28,8 @@ class RentalControllerIT {
 
     private String login(String email, String password) throws Exception {
         String json = """
-            { "email": "%s", "password": "%s" }
-        """.formatted(email, password);
+                    { "email": "%s", "password": "%s" }
+                """.formatted(email, password);
 
         String response = mockMvc.perform(post("/api/v1/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -51,7 +51,9 @@ class RentalControllerIT {
         String authorResponse = mockMvc.perform(post("/api/v1/authors")
                         .header("Authorization", "Bearer " + adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""{ "name": "Isaac Asimov" }"""))
+                        .content("""
+                                { "name": "Isaac Asimov" }
+                                """))
                 .andExpect(status().isCreated())
                 .andReturn().getResponse().getContentAsString();
 
@@ -62,13 +64,13 @@ class RentalControllerIT {
                         .header("Authorization", "Bearer " + adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                            {
-                              "title": "Foundation",
-                              "isbn": "9780553293357",
-                              "publicationYear": 1951,
-                              "authorId": %d
-                            }
-                        """.formatted(authorId)))
+                                    {
+                                      "title": "Foundation",
+                                      "isbn": "9780553293357",
+                                      "publicationYear": 1951,
+                                      "authorId": %d
+                                    }
+                                """.formatted(authorId)))
                 .andExpect(status().isCreated())
                 .andReturn().getResponse().getContentAsString();
 
@@ -78,7 +80,9 @@ class RentalControllerIT {
         mockMvc.perform(post("/api/v1/books/{id}/copies", bookId)
                         .header("Authorization", "Bearer " + adminToken)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""{ "count": 1 }"""))
+                        .content("""
+                                { "count": 1 }
+                                """))
                 .andExpect(status().isNoContent());
 
         // Rent
