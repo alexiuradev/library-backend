@@ -22,3 +22,7 @@ management:
 jwt:
   secret: "change-me-to-a-long-random-secret-change-me-to-a-long-random-secret"
   expirationMillis: 3600000
+
+library:
+  rental:
+    max-active: 3

@@ -7,6 +7,7 @@
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookController.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/demo/DemoController.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookService.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/config/OpenApiConfig.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/user/User.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/dto/BookResponse.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/AuthController.java
@@ -17,11 +18,13 @@
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/dto/RentalResponse.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/common/ApiExceptionHandler.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookCopy.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/OverdueRentalScheduler.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/AuthorService.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/AuthResponse.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/AuthLoginRequest.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/Book.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/RentalController.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/RentalProperties.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/Author.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/user/UserRepository.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/RentalRepository.java

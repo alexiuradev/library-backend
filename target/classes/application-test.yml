@@ -12,3 +12,7 @@ spring:
 jwt:
   secret: "test-secret-test-secret-test-secret-test-secret"
   expirationMillis: 3600000
+
+library:
+  rental:
+    max-active: 3
