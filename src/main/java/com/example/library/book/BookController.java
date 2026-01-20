@@ -50,4 +50,44 @@ public class BookController {
                           @Valid @RequestBody AddCopiesRequest request) {
         bookService.addCopies(id, request.getCount());
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping
+    public List<BookResponse> listBooks() {
+        return bookRepository.findAll().stream()
+                .map(book -> new BookResponse(
+                        book.getId(),
+                        book.getTitle(),
+                        book.getIsbn(),
+                        book.getPublicationYear(),
+                        book.getAuthor().getName(),
+                        copyRepository.countByBookIdAndStatus(
+                                book.getId(),
+                                BookCopy.CopyStatus.AVAILABLE
+                        )
+                ))
+                .toList();
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{id}")
+    public BookResponse getBook(@PathVariable Long id) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found"));
+
+        long available = copyRepository.countByBookIdAndStatus(
+                book.getId(),
+                BookCopy.CopyStatus.AVAILABLE
+        );
+
+        return new BookResponse(
+                book.getId(),
+                book.getTitle(),
+                book.getIsbn(),
+                book.getPublicationYear(),
+                book.getAuthor().getName(),
+                available
+        );
+    }
+
 }
