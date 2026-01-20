@@ -1,17 +1,37 @@
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/auth/AuthController.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/security/JwtService.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/security/JwtProperties.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/security/JwtAuthenticationFilter.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/auth/dto/AuthRegisterRequest.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/common/ApiExceptionHandler.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/auth/dto/MeResponse.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/security/Role.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/user/UserRepository.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/security/SecurityConfig.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/LibraryApplication.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/auth/dto/AuthLoginRequest.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/security/DbUserDetailsService.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/auth/dto/AuthResponse.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/auth/AuthService.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/user/User.java
-/Users/iuraalex/Downloads/backend 4/src/main/java/com/example/library/demo/DemoController.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/Role.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/dto/CreateBookRequest.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/SecurityConfig.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/AuthRegisterRequest.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/AuthorRepository.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/dto/AuthorResponse.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookController.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/demo/DemoController.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookService.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/user/User.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/dto/BookResponse.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/AuthController.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookRepository.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookCopyRepository.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/Rental.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/DbUserDetailsService.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/dto/RentalResponse.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/common/ApiExceptionHandler.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookCopy.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/AuthorService.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/AuthResponse.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/AuthLoginRequest.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/Book.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/RentalController.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/Author.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/user/UserRepository.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/RentalRepository.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/RentalService.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/JwtAuthenticationFilter.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/AuthService.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/AuthorController.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/JwtProperties.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/dto/AddCopiesRequest.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/JwtService.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/dto/CreateAuthorRequest.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/LibraryApplication.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/MeResponse.java

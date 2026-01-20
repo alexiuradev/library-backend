@@ -1,1 +1,4 @@
-/Users/iuraalex/Downloads/backend 4/src/test/java/com/example/library/AuthFlowIT.java
+/Users/iuraalex/Downloads/library-backend/src/test/java/com/example/library/author/AuthorControllerIT.java
+/Users/iuraalex/Downloads/library-backend/src/test/java/com/example/library/rental/RentalControllerIT.java
+/Users/iuraalex/Downloads/library-backend/src/test/java/com/example/library/AuthFlowIT.java
+/Users/iuraalex/Downloads/library-backend/src/test/java/com/example/library/book/BookControllerIT.java

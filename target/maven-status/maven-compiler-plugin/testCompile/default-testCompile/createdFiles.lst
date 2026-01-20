@@ -1,1 +1,4 @@
+com/example/library/book/BookControllerIT.class
+com/example/library/author/AuthorControllerIT.class
+com/example/library/rental/RentalControllerIT.class
 com/example/library/AuthFlowIT.class
