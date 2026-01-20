@@ -44,3 +44,7 @@ jobs:
 
       - name: Build & Test
         run: mvn clean verify
+
+      - name: Build Docker image
+        run: docker build -t library-backend:ci .
+
