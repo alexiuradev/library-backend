@@ -1,9 +1,12 @@
 package com.example.library.rental;
 
-import com.example.library.auth.CurrentUser;
+import com.example.library.rental.dto.RentalResponse;
 import com.example.library.user.User;
+import com.example.library.user.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,22 +16,26 @@ import java.util.List;
 public class RentalController {
 
     private final RentalService rentalService;
+    private final UserRepository userRepository;
 
-    public RentalController(RentalService rentalService) {
+    public RentalController(RentalService rentalService, UserRepository userRepository) {
         this.rentalService = rentalService;
+        this.userRepository = userRepository;
     }
 
-    // MEMBER rents a book
     @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/books/{bookId}")
     @ResponseStatus(HttpStatus.CREATED)
     public RentalResponse rentBook(@PathVariable Long bookId,
-                                   @CurrentUser User user) {
+                                   @AuthenticationPrincipal UserDetails userDetails) {
+
+        User user = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new IllegalStateException("User not found"));
+
         Rental rental = rentalService.rentBook(user.getId(), bookId);
         return RentalResponse.from(rental);
     }
 
-    // MEMBER returns a rented copy
     @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/{rentalId}/return")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -36,10 +43,13 @@ public class RentalController {
         rentalService.returnBook(rentalId);
     }
 
-    // MEMBER views own active rentals
     @PreAuthorize("hasRole('MEMBER')")
     @GetMapping("/me")
-    public List<RentalResponse> myActiveRentals(@CurrentUser User user) {
+    public List<RentalResponse> myActiveRentals(@AuthenticationPrincipal UserDetails userDetails) {
+
+        User user = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new IllegalStateException("User not found"));
+
         return rentalService.getActiveRentalsForUser(user.getId())
                 .stream()
                 .map(RentalResponse::from)
