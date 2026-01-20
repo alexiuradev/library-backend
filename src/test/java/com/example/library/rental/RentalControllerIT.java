@@ -6,10 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.time.LocalDateTime;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -25,6 +28,9 @@ class RentalControllerIT {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private RentalRepository rentalRepository;
 
     private String login(String email, String password) throws Exception {
         String json = """
@@ -110,4 +116,68 @@ class RentalControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(0));
     }
+
+    @Test
+    void memberCanSeeOverdueRentals() throws Exception {
+        String adminToken = login("admin@test.com", "secret12");
+        String memberToken = login("author@test.com", "secret12");
+
+        // Create Author
+        String authorResponse = mockMvc.perform(post("/api/v1/authors")
+                        .header("Authorization", "Bearer " + adminToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                { "name": "George Orwell" }
+                                """))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString();
+
+        Long authorId = objectMapper.readTree(authorResponse).get("id").asLong();
+
+        // Create Book
+        String bookResponse = mockMvc.perform(post("/api/v1/books")
+                        .header("Authorization", "Bearer " + adminToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                        {
+                          "title": "1984",
+                          "isbn": "9780451524935",
+                          "publicationYear": 1949,
+                          "authorId": %d
+                        }
+                    """.formatted(authorId)))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString();
+
+        Long bookId = objectMapper.readTree(bookResponse).get("id").asLong();
+
+        // Add copy
+        mockMvc.perform(post("/api/v1/books/{id}/copies", bookId)
+                        .header("Authorization", "Bearer " + adminToken)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                { "count": 1 }
+                                """))
+                .andExpect(status().isNoContent());
+
+        // Rent
+        String rentalResponse = mockMvc.perform(post("/api/v1/rentals/books/{id}", bookId)
+                        .header("Authorization", "Bearer " + memberToken))
+                .andExpect(status().isCreated())
+                .andReturn().getResponse().getContentAsString();
+
+        Long rentalId = objectMapper.readTree(rentalResponse).get("rentalId").asLong();
+
+        // Force overdue by updating DB (directly via repository)
+        Rental rental = rentalRepository.findById(rentalId).orElseThrow();
+        rental.setDueAt(LocalDateTime.now().minusDays(1));
+        rentalRepository.save(rental);
+
+        // Call overdue endpoint
+        mockMvc.perform(get("/api/v1/rentals/me/overdue")
+                        .header("Authorization", "Bearer " + memberToken))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].bookTitle").value("1984"));
+    }
+
 }

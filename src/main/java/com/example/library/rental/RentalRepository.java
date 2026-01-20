@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDateTime;
 
 public interface RentalRepository extends JpaRepository<Rental, Long> {
 
@@ -12,4 +13,6 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
     List<Rental> findByUserIdAndReturnedAtIsNull(Long userId);
 
     long countByUserIdAndReturnedAtIsNull(Long userId);
+
+    List<Rental> findByUserIdAndReturnedAtIsNullAndDueAtBefore(Long userId, LocalDateTime now);
 }

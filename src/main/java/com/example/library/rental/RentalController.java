@@ -55,4 +55,17 @@ public class RentalController {
                 .map(RentalResponse::from)
                 .toList();
     }
+
+    @PreAuthorize("hasRole('MEMBER')")
+    @GetMapping("/me/overdue")
+    public List<RentalResponse> myOverdueRentals(@AuthenticationPrincipal UserDetails userDetails) {
+        User user = userRepository.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new IllegalStateException("User not found"));
+
+        return rentalService.getOverdueRentalsForUser(user.getId())
+                .stream()
+                .map(rental -> RentalResponse.from(rental))
+                .toList();
+    }
+
 }

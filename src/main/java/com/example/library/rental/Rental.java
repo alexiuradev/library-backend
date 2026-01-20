@@ -71,4 +71,9 @@ public class Rental {
     public void markReturned() {
         this.returnedAt = LocalDateTime.now();
     }
+
+    public void setDueAt(LocalDateTime dueAt) {
+        this.dueAt = dueAt;
+    }
+
 }

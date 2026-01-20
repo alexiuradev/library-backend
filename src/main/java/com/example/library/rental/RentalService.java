@@ -81,4 +81,12 @@ public class RentalService {
     public List<Rental> getActiveRentalsForUser(Long userId) {
         return rentalRepository.findByUserIdAndReturnedAtIsNull(userId);
     }
+
+    @Transactional(readOnly = true)
+    public List<Rental> getOverdueRentalsForUser(Long userId) {
+        return rentalRepository.findByUserIdAndReturnedAtIsNullAndDueAtBefore(
+                userId, LocalDateTime.now()
+        );
+    }
+
 }
