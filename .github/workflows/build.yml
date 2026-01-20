@@ -48,3 +48,21 @@ jobs:
       - name: Build Docker image
         run: docker build -t library-backend:ci .
 
+      - name: Start docker-compose
+        run: docker compose up -d
+
+      - name: Wait for application
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:8080/actuator/health | grep '"status":"UP"'; then
+              echo "App is up"
+              exit 0
+            fi
+            echo "Waiting for app..."
+            sleep 5
+          done
+          echo "App did not start in time"
+          exit 1
+
+      - name: Stop docker-compose
+        run: docker compose down
