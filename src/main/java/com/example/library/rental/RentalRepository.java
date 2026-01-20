@@ -10,4 +10,6 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
     Optional<Rental> findByBookCopyIdAndReturnedAtIsNull(Long bookCopyId);
 
     List<Rental> findByUserIdAndReturnedAtIsNull(Long userId);
+
+    long countByUserIdAndReturnedAtIsNull(Long userId);
 }

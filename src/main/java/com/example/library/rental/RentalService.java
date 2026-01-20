@@ -21,15 +21,25 @@ public class RentalService {
     private final BookCopyRepository bookCopyRepository;
     private final UserRepository userRepository;
 
+    private final RentalProperties rentalProperties;
+
+
     public RentalService(RentalRepository rentalRepository,
                          BookCopyRepository bookCopyRepository,
-                         UserRepository userRepository) {
+                         UserRepository userRepository, RentalProperties rentalProperties) {
         this.rentalRepository = rentalRepository;
         this.bookCopyRepository = bookCopyRepository;
         this.userRepository = userRepository;
+        this.rentalProperties = rentalProperties;
     }
 
     public Rental rentBook(Long userId, Long bookId) {
+
+        long active = rentalRepository.countByUserIdAndReturnedAtIsNull(userId);
+        if (active >= rentalProperties.getMaxActive()) {
+            throw new IllegalStateException("Maximum active rentals reached");
+        }
+
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
