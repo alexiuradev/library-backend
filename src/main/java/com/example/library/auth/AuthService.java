@@ -37,6 +37,21 @@ public class AuthService {
         return jwtService.generateToken(u.getId(), u.getEmail(), u.getRole());
     }
 
+    @Transactional
+    public String registerAdmin(AuthRegisterRequest req) {
+        String email = req.getEmail().toLowerCase().trim();
+        if (userRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("Email already registered");
+        }
+        User u = new User();
+        u.setEmail(email);
+        u.setPassword(passwordEncoder.encode(req.getPassword()));
+        u.setRole(Role.ADMIN);   // 👈 ADMIN here
+        u = userRepository.save(u);
+        return jwtService.generateToken(u.getId(), u.getEmail(), u.getRole());
+    }
+
+
     @Transactional(readOnly = true)
     public String login(AuthLoginRequest req) {
         String email = req.getEmail().toLowerCase().trim();

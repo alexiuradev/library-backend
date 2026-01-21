@@ -1,5 +1,6 @@
 package com.example.library.rental;
 
+import com.example.library.book.Book;
 import com.example.library.book.BookCopy;
 import com.example.library.book.BookCopyRepository;
 import com.example.library.book.BookCopy.CopyStatus;
@@ -49,6 +50,18 @@ public class RentalService {
         if (availableCopies.isEmpty()) {
             throw new IllegalStateException("No available copies for this book");
         }
+
+        Book book = bookCopyRepository.findById(bookId)
+                .orElseThrow(() -> new IllegalArgumentException("Book not found")).getBook();
+
+        if (rentalRepository.existsByUserIdAndBook_TitleAndBook_Author_NameAndReturnedAtIsNull(
+                userId,
+                book.getTitle(),
+                book.getAuthor().getName()
+        )) {
+            throw new IllegalStateException("You already rented this book (same title & author)");
+        }
+
 
         BookCopy copy = availableCopies.get(0);
 
