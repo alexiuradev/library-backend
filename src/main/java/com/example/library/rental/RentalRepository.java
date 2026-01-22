@@ -2,21 +2,20 @@ package com.example.library.rental;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface RentalRepository extends JpaRepository<Rental, Long> {
 
-    boolean existsByUserIdAndBook_TitleAndBook_Author_NameAndReturnedAtIsNull(
+    boolean existsByUser_IdAndBookCopy_Book_TitleAndBookCopy_Book_Author_NameAndReturnedAtIsNull(
             Long userId, String title, String authorName
     );
 
-    List<Rental> findByUserIdAndReturnedAtIsNull(Long userId);
+    List<Rental> findByUser_IdAndReturnedAtIsNull(Long userId);
 
-    long countByUserIdAndReturnedAtIsNull(Long userId);
+    long countByUser_IdAndReturnedAtIsNull(Long userId);
 
-    List<Rental> findByUserIdAndReturnedAtIsNullAndDueAtBefore(Long userId, LocalDateTime now);
+    List<Rental> findByUser_IdAndReturnedAtIsNullAndDueAtBefore(Long userId, LocalDateTime now);
 
     List<Rental> findByReturnedAtIsNullAndDueAtBefore(LocalDateTime now);
-
 }

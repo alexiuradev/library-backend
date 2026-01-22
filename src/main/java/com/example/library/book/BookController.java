@@ -63,7 +63,7 @@ public class BookController {
                         book.getIsbn(),
                         book.getPublicationYear(),
                         book.getAuthor().getName(),
-                        copyRepository.countByBookIdAndStatus(
+                        copyRepository.countByBook_IdAndStatus(
                                 book.getId(),
                                 BookCopy.CopyStatus.AVAILABLE
                         )
@@ -77,7 +77,7 @@ public class BookController {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Book not found"));
 
-        long available = copyRepository.countByBookIdAndStatus(
+        long available = copyRepository.countByBook_IdAndStatus(
                 book.getId(),
                 BookCopy.CopyStatus.AVAILABLE
         );

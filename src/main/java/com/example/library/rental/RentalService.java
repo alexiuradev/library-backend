@@ -36,7 +36,7 @@ public class RentalService {
 
     public Rental rentBook(Long userId, Long bookId) {
 
-        long active = rentalRepository.countByUserIdAndReturnedAtIsNull(userId);
+        long active = rentalRepository.countByUser_IdAndReturnedAtIsNull(userId);
         if (active >= rentalProperties.getMaxActive()) {
             throw new IllegalStateException("Maximum active rentals reached");
         }
@@ -44,17 +44,16 @@ public class RentalService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        List<BookCopy> availableCopies =
-                bookCopyRepository.findAvailableCopies(bookId);
+        // Pick one available copy for THIS book
+        BookCopy copy = bookCopyRepository
+                .findFirstByBook_IdAndStatusOrderByIdAsc(bookId, BookCopy.CopyStatus.AVAILABLE)
+                .orElseThrow(() -> new IllegalStateException("No available copies"));
 
-        if (availableCopies.isEmpty()) {
-            throw new IllegalStateException("No available copies for this book");
-        }
+        // The book comes from the selected copy (correct)
+        Book book = copy.getBook();
 
-        Book book = bookCopyRepository.findById(bookId)
-                .orElseThrow(() -> new IllegalArgumentException("Book not found")).getBook();
-
-        if (rentalRepository.existsByUserIdAndBook_TitleAndBook_Author_NameAndReturnedAtIsNull(
+        // Enforce: same title+author only once per active rental
+        if (rentalRepository.existsByUser_IdAndBookCopy_Book_TitleAndBookCopy_Book_Author_NameAndReturnedAtIsNull(
                 userId,
                 book.getTitle(),
                 book.getAuthor().getName()
@@ -62,17 +61,19 @@ public class RentalService {
             throw new IllegalStateException("You already rented this book (same title & author)");
         }
 
-
-        BookCopy copy = availableCopies.get(0);
-
-        copy.setStatus(CopyStatus.RENTED);
-        bookCopyRepository.save(copy);
+        // Mark copy rented
+        copy.setStatus(BookCopy.CopyStatus.RENTED);
 
         LocalDateTime dueAt = LocalDateTime.now().plusDays(DEFAULT_RENT_DAYS);
-
         Rental rental = new Rental(user, copy, dueAt);
+
+        // No need to save copy explicitly; JPA will flush changes in the same transaction,
+        // but it's OK if you want to keep it explicit.
+        // bookCopyRepository.save(copy);
+
         return rentalRepository.save(rental);
     }
+
 
     public void returnBook(Long rentalId) {
         Rental rental = rentalRepository.findById(rentalId)
@@ -92,12 +93,12 @@ public class RentalService {
 
     @Transactional(readOnly = true)
     public List<Rental> getActiveRentalsForUser(Long userId) {
-        return rentalRepository.findByUserIdAndReturnedAtIsNull(userId);
+        return rentalRepository.findByUser_IdAndReturnedAtIsNull(userId);
     }
 
     @Transactional(readOnly = true)
     public List<Rental> getOverdueRentalsForUser(Long userId) {
-        return rentalRepository.findByUserIdAndReturnedAtIsNullAndDueAtBefore(
+        return rentalRepository.findByUser_IdAndReturnedAtIsNullAndDueAtBefore(
                 userId, LocalDateTime.now()
         );
     }
