@@ -18,4 +18,9 @@ public interface RentalRepository extends JpaRepository<Rental, Long> {
     List<Rental> findByUser_IdAndReturnedAtIsNullAndDueAtBefore(Long userId, LocalDateTime now);
 
     List<Rental> findByReturnedAtIsNullAndDueAtBefore(LocalDateTime now);
+
+    List<Rental> findByStatusAndDueAtBefore(RentalStatus status, LocalDateTime time);
+
+    List<Rental> findByUser_IdAndStatus(Long userId, RentalStatus status);
+
 }

@@ -3,11 +3,15 @@ package com.example.library.rental;
 import com.example.library.book.BookCopy;
 import com.example.library.user.User;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "rentals")
+@Getter
+@Setter
 public class Rental {
 
     @Id
@@ -30,6 +34,12 @@ public class Rental {
 
     private LocalDateTime returnedAt;
 
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private RentalStatus status;
+
+
     protected Rental() {
     }
 
@@ -38,42 +48,21 @@ public class Rental {
         this.bookCopy = bookCopy;
         this.rentedAt = LocalDateTime.now();
         this.dueAt = dueAt;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public BookCopy getBookCopy() {
-        return bookCopy;
-    }
-
-    public LocalDateTime getRentedAt() {
-        return rentedAt;
-    }
-
-    public LocalDateTime getDueAt() {
-        return dueAt;
-    }
-
-    public LocalDateTime getReturnedAt() {
-        return returnedAt;
-    }
-
-    public boolean isActive() {
-        return returnedAt == null;
+        this.status = RentalStatus.ACTIVE;
     }
 
     public void markReturned() {
         this.returnedAt = LocalDateTime.now();
+        this.status = RentalStatus.RETURNED;
     }
 
-    public void setDueAt(LocalDateTime dueAt) {
-        this.dueAt = dueAt;
+    public boolean isActive() {
+        return this.status == RentalStatus.ACTIVE;
     }
+
+    public void markOverdue() {
+        this.status = RentalStatus.OVERDUE;
+    }
+
 
 }

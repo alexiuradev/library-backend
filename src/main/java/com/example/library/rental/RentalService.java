@@ -103,4 +103,13 @@ public class RentalService {
         );
     }
 
+    @Transactional(readOnly = true)
+    public List<Rental> getOverdueForUser(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        return rentalRepository.findByUser_IdAndStatus(user.getId(), RentalStatus.OVERDUE);
+    }
+
+
 }
