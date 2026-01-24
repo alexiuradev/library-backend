@@ -2,6 +2,7 @@
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/dto/CreateBookRequest.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/SecurityConfig.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/dto/AuthRegisterRequest.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/RentalStatus.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/AuthorRepository.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/author/dto/AuthorResponse.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookController.java
@@ -12,6 +13,7 @@
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/dto/BookResponse.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/auth/AuthController.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookRepository.java
+/Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/OverdueScheduler.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/book/BookCopyRepository.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/rental/Rental.java
 /Users/iuraalex/Downloads/library-backend/src/main/java/com/example/library/security/DbUserDetailsService.java

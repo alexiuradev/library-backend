@@ -3,6 +3,7 @@ com/example/library/auth/dto/MeResponse.class
 com/example/library/rental/RentalController.class
 com/example/library/security/SecurityConfig.class
 com/example/library/rental/RentalProperties.class
+com/example/library/rental/RentalStatus.class
 com/example/library/author/AuthorController.class
 com/example/library/book/Book.class
 com/example/library/security/JwtAuthenticationFilter.class
@@ -10,6 +11,7 @@ com/example/library/rental/OverdueRentalScheduler.class
 com/example/library/common/ApiExceptionHandler.class
 com/example/library/book/BookService.class
 com/example/library/rental/dto/RentalResponse.class
+com/example/library/rental/OverdueScheduler.class
 com/example/library/author/Author.class
 com/example/library/book/dto/BookResponse.class
 com/example/library/rental/Rental.class
